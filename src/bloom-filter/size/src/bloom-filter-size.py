@@ -8,7 +8,7 @@ required_sizes = [
 ]
 
 error_rates = [
-    0.01, 0.001, 0.0001
+    1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9
 ]
 
 r = redis.Redis(host=os.environ.get('REDIS_HOST'), port=os.environ.get('REDIS_PORT'), db=0)

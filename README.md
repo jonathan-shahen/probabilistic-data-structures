@@ -14,6 +14,10 @@ More Details [Bloom Filter](docs/Bloom-Filter.md).
 ### Quotient Filters
 
 
+### Cuckoo Filters
+
+More Details [Cuckoo Filter](docs/Cuckoo-Filter.md).
+
 ### Count-Min Sketch
 
 
