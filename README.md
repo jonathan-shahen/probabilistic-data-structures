@@ -10,13 +10,14 @@ This repo holds my experiments with probabilistic Data Structures as well as doc
 
 More Details [Bloom Filter](docs/Bloom-Filter.md).
 
-
-### Quotient Filters
-
-
 ### Cuckoo Filters
 
 More Details [Cuckoo Filter](docs/Cuckoo-Filter.md).
+
+### Quotient Filters
+
+More Details [Quotient Filter](docs/Quotient-Filter.md).
+
 
 ### Count-Min Sketch
 

@@ -1,4 +1,4 @@
-# Bloom Filters
+# Cuckoo Filters
 
 ## Overview
 

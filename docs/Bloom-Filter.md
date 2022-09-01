@@ -12,6 +12,6 @@ Bloom filters can be tweaked to decrease the probability of error by increasing 
 
 ## Quick Features
 
-* Operations: INSERT, EXISTS
+* Operations: INSERT, EXISTS, COUNT
 * False Positives: Yes
 * False Negatives: No
