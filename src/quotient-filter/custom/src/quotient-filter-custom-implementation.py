@@ -9,18 +9,16 @@ class CustomQuotientFilter:
         @param num_elements an estimated number of total unique elements to be inserted (i.e. 1e12)
         @param error_rate the desired false positive error rate (i.e. 1e-4)
         '''
-        pass
+        self.count = 0
         
     
-    def insert(self, item):
+    def count(self):
         '''
-        This function inserts into the Bloom Filter
+        This function the count of unique inserts into the Quotient Filter
 
-        @param item Some object, that is hashable, to insert into the bloom filter.
-        @return void
+        @return integer of the number of unique inserts that occurred 
         '''
-        pass
-
+        return self.count
     
     def exists(self, item):
         '''
@@ -31,9 +29,49 @@ class CustomQuotientFilter:
         '''
 
         pass
+
+    def insert(self, item):
+        '''
+        This function inserts into the Quotient Filter
+
+        @param item Some object, that is hashable, to insert the fingerprint into the Quotient filter.
+        @return TRUE if the item hasn't already been inserted, FALSE if it was already in the filter
+        '''
+        pass
+
+    def remove(self, item):
+        '''
+        This function removes from the Quotient Filter.
+
+        This function has the possibility of removing an item with the same fingerprint
+
+        @param item Some object, that is hashable, to remove the fingerprint from the Quotient filter.
+        @return TRUE if the item was removed, FALSE if it wasn't found
+        '''
+        pass
+
+    def merge(self, filter):
+        '''
+        This function merges a Quotient Filter into itself.
+
+        @param filter the Quotient filter to merge into itself 
+        @return TRUE if the filter was merged, FALSE if the filter is not mergable (not a filter or not the same hash length)
+        '''
+        pass
+
+    def resize(self, newSize):
+        '''
+        This function resizes the Quotient Filter.
+
+        @param newSize 
+        @return TRUE if the item was removed, FALSE if it wasn't found
+        '''
+        pass
+
     
     def info(self):
         return {
+            "count": self.count,
         }
 
 if __name__ == "__main__":

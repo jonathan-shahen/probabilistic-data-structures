@@ -4,7 +4,7 @@
 
 This repo holds my experiments with probabilistic Data Structures as well as documenting each of them
 
-## Overview of Prob. Data Structures
+## Approximate Membership
 
 ### Bloom Filters
 
@@ -18,6 +18,7 @@ More Details [Cuckoo Filter](docs/Cuckoo-Filter.md).
 
 More Details [Quotient Filter](docs/Quotient-Filter.md).
 
+## Frequency Estimation
 
 ### Count-Min Sketch
 

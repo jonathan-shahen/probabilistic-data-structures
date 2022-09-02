@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  redis:
+    container_name: cuckoo_filter_size_redis
+    image: redislabs/rebloom:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+      resources:
+        limits:
+          memory: ${DOCKER_REDIS_MEM_LIMIT:-2G}
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+
+  cuckoo_filter_size:
+    container_name: cuckoo_filter_size
+    image: python:3
+    entrypoint: /project/entrypoint.sh
+    command: python -u cuckoo-filter-size.py
+    depends_on:
+      - redis
+    volumes:
+      - ./src:/project
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379

@@ -3,31 +3,14 @@ import mmh3
 
 from bitarray import bitarray
 
-class CustomBloomFilter:
+class CustomCuckooFilter:
     def __init__(self, num_elements, error_rate):
         '''
         @param num_elements an estimated number of total unique elements to be inserted (i.e. 1e12)
         @param error_rate the desired false positive error rate (i.e. 1e-4)
         '''
-        # Approximate number of unique items
-        self.est_count = 0
-        # Prevent math errors
-        if num_elements <= 1:
-            num_elements = 2
-        
-        # shown in the math with `m`
-        self.num_bits = int(
-            -math.log(error_rate) * num_elements /
-            math.log(2)**2
-        )
-        # Shown in the math with `k`
-        self.num_hashes = int(
-            self.num_bits * math.log(2) /
-            num_elements
-        )
-
-        self.bit_array = bitarray(self.num_bits)
-        self.bit_array.setall(0)
+        # TODO
+        pass
     
     def insert(self, item):
         '''
@@ -37,14 +20,8 @@ class CustomBloomFilter:
         @return void
         '''
 
-        never_seen_before = False
-        for i in range(self.num_hashes):
-            if self.bit_array[mmh3.hash(item, i) % self.num_bits] != 1:
-                never_seen_before = True
-                self.bit_array[mmh3.hash(item, i) % self.num_bits] = 1
-
-        if never_seen_before:
-            self.est_count += 1
+        # TODO
+        pass
     
     def exists(self, item):
         '''
@@ -54,18 +31,15 @@ class CustomBloomFilter:
         @return TRUE if previously inserted (error possible); FALSE if never inserted (no error)
         '''
 
-        for i in range(self.num_hashes):
-            if self.bit_array[mmh3.hash(item, i) % self.num_bits] == 0:
-                return False
-
-        return True
+        # TODO
+        pass
     
     def info(self):
+        # TODO
         return {
-            "num_bits": self.num_bits,
-            "num_bytes": math.ceil(self.num_bits/8),
-            "num_hashes": self.num_hashes,
-            "est_count": self.est_count,
+            "num_bits": 0,
+            "num_bytes": 0,
+            "num_hashes": 0,
         }
 
 if __name__ == "__main__":
@@ -84,7 +58,7 @@ if __name__ == "__main__":
         print("| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |")
         print("|---|---|---|---|")
         for size in required_sizes:
-            filter = CustomBloomFilter(size, error_rate)
+            filter = CustomCuckooFilter(size, error_rate)
             info = filter.info()
             print(f"| {size:,} | {info['num_bytes']:,} | {error_rate} | {info['num_hashes']} |")
             del filter
