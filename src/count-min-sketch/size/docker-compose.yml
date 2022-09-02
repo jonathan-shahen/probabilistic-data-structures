@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   redis:
-    container_name: bloom_filter_size_redis
+    container_name: count_min_sketch_size_redis
     image: redislabs/rebloom:latest
     deploy:
       restart_policy:
@@ -14,12 +14,11 @@ services:
     ports:
       - ${REDIS_PORT:-6379}:6379
 
-  bloom_filter_size:
-    container_name: bloom_filter_size
+  count_min_sketch_size:
+    container_name: count_min_sketch_size
     image: python:3
     entrypoint: /project/entrypoint.sh
-    command: python -u bloom-filter-size.py
-      # command: pyinstrument processor.py
+    command: python -u count-min-sketch-size.py
     depends_on:
       - redis
     volumes:
