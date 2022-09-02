@@ -2,7 +2,7 @@
 
 ## Description
 
-This repo shows how much storage is required for storing XX items into a REDIS Count Min Sketch.
+This repo shows how much storage is required for creating a REDIS Count Min Sketch with XX counters and YY hashes.
 
 ## Setup
 
@@ -16,15 +16,12 @@ This repo shows how much storage is required for storing XX items into a REDIS C
 
 ## Results
 
-The Redis Count Min Sketch is created with NO_SCALING to be more memory efficient.
-
 Columns presented below:
 
-1. **Number of Items** - The expected number of items to be inserted
-1. **Count Min Sketch Size (bytes)** - The size of the bloom filter, as reported by the bloom filter, in bytes
+1. **Number of Hashes** - The number of hashes to use when creating the CMS
+1. **Number of Counters** - The number of counters to use when creating the CMS
+1. **Memory Usage (human)** - The size of the CMS in human readable format
 1. **Memory Usage (bytes)** - The number of bytes that a key and its value require to be stored in RAM
-1. **Error Rate** - The error rate that is set
-1. **Number of Filters** - The number of sub-bloom filters, a technique use to enable expansion and scaling. Sub-filters require extra space and extra hash functions.
 
 ### Number Hashes: 1
 | Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |

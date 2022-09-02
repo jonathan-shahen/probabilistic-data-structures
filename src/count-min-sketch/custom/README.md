@@ -1,8 +1,8 @@
-# Bloom Filter: Custom Implementation
+# Count Min Sketch: Custom Implementation
 
 ## Description
 
-This repo shows a custom implementation of a Bloom Filter.
+This repo shows how much storage is required for creating a Custom Count Min Sketch with XX counters and YY hashes.
 
 ## Setup
 
@@ -18,102 +18,98 @@ This repo shows a custom implementation of a Bloom Filter.
 This is inspired by the implementation presented in the book `Algorithms and Data Structures for Massive Datasets`
 by Dzejla Medjedovic and Emin Tahirovic
 
+## Conclusion
+
+The custom implementation allows us to reduce the counter size, compared to Redis, thus the results below show half the
+storage requirements since counters only go up to 4.3 billion.
+
 ## Results
 
-### Error Rate: 0.001
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
-|---|---|---|---|
-| 1 | 4 | 0.001 | 9 |
-| 10 | 18 | 0.001 | 9 |
-| 100 | 180 | 0.001 | 9 |
-| 1,000 | 1,798 | 0.001 | 9 |
-| 10,000 | 17,972 | 0.001 | 9 |
-| 100,000 | 179,720 | 0.001 | 9 |
-| 1,000,000 | 1,797,199 | 0.001 | 9 |
-| 10,000,000 | 17,971,985 | 0.001 | 9 |
-| 100,000,000 | 179,719,845 | 0.001 | 9 |
-| 1,000,000,000 | 1,797,198,446 | 0.001 | 9 |
+1. **Number of Hashes** - The number of hashes to use when creating the CMS
+1. **Number of Counters** - The number of counters to use when creating the CMS
+1. **Memory Usage (human)** - The size of the CMS in human readable format
+1. **Memory Usage (bytes)** - The number of bytes that a key and its value require to be stored in RAM
 
-### Error Rate: 0.0001
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 1
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 5 | 0.0001 | 13 |
-| 10 | 24 | 0.0001 | 13 |
-| 100 | 240 | 0.0001 | 13 |
-| 1,000 | 2,397 | 0.0001 | 13 |
-| 10,000 | 23,963 | 0.0001 | 13 |
-| 100,000 | 239,627 | 0.0001 | 13 |
-| 1,000,000 | 2,396,265 | 0.0001 | 13 |
-| 10,000,000 | 23,962,646 | 0.0001 | 13 |
-| 100,000,000 | 239,626,460 | 0.0001 | 13 |
-| 1,000,000,000 | 2,396,264,595 | 0.0001 | 13 |
+| 1 | 1 |  4.00B | 4 |
+| 1 | 10 | 40.00B | 40 |
+| 1 | 100 | 400.00B | 400 |
+| 1 | 1,000 |  3.91KiB | 4,000 |
+| 1 | 10,000 | 39.06KiB | 40,000 |
+| 1 | 100,000 | 390.62KiB | 400,000 |
+| 1 | 1,000,000 |  3.81MiB | 4,000,000 |
+| 1 | 10,000,000 | 38.15MiB | 40,000,000 |
+| 1 | 100,000,000 | 381.47MiB | 400,000,000 |
+| 1 | 1,000,000,000 |  3.73GiB | 4,000,000,000 |
 
-### Error Rate: 1e-05
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 2
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 6 | 1e-05 | 16 |
-| 10 | 30 | 1e-05 | 16 |
-| 100 | 300 | 1e-05 | 16 |
-| 1,000 | 2,996 | 1e-05 | 16 |
-| 10,000 | 29,954 | 1e-05 | 16 |
-| 100,000 | 299,533 | 1e-05 | 16 |
-| 1,000,000 | 2,995,331 | 1e-05 | 16 |
-| 10,000,000 | 29,953,308 | 1e-05 | 16 |
-| 100,000,000 | 299,533,075 | 1e-05 | 16 |
-| 1,000,000,000 | 2,995,330,743 | 1e-05 | 16 |
+| 2 | 1 |  8.00B | 8 |
+| 2 | 10 | 80.00B | 80 |
+| 2 | 100 | 800.00B | 800 |
+| 2 | 1,000 |  7.81KiB | 8,000 |
+| 2 | 10,000 | 78.12KiB | 80,000 |
+| 2 | 100,000 | 781.25KiB | 800,000 |
+| 2 | 1,000,000 |  7.63MiB | 8,000,000 |
+| 2 | 10,000,000 | 76.29MiB | 80,000,000 |
+| 2 | 100,000,000 | 762.94MiB | 800,000,000 |
+| 2 | 1,000,000,000 |  7.45GiB | 8,000,000,000 |
 
-### Error Rate: 1e-06
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 3
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 8 | 1e-06 | 19 |
-| 10 | 36 | 1e-06 | 19 |
-| 100 | 360 | 1e-06 | 19 |
-| 1,000 | 3,595 | 1e-06 | 19 |
-| 10,000 | 35,944 | 1e-06 | 19 |
-| 100,000 | 359,440 | 1e-06 | 19 |
-| 1,000,000 | 3,594,397 | 1e-06 | 19 |
-| 10,000,000 | 35,943,969 | 1e-06 | 19 |
-| 100,000,000 | 359,439,690 | 1e-06 | 19 |
-| 1,000,000,000 | 3,594,396,892 | 1e-06 | 19 |
+| 3 | 1 | 12.00B | 12 |
+| 3 | 10 | 120.00B | 120 |
+| 3 | 100 |  1.17KiB | 1,200 |
+| 3 | 1,000 | 11.72KiB | 12,000 |
+| 3 | 10,000 | 117.19KiB | 120,000 |
+| 3 | 100,000 |  1.14MiB | 1,200,000 |
+| 3 | 1,000,000 | 11.44MiB | 12,000,000 |
+| 3 | 10,000,000 | 114.44MiB | 120,000,000 |
+| 3 | 100,000,000 |  1.12GiB | 1,200,000,000 |
+| 3 | 1,000,000,000 | 11.18GiB | 12,000,000,000 |
 
-### Error Rate: 1e-07
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 5
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 9 | 1e-07 | 23 |
-| 10 | 42 | 1e-07 | 23 |
-| 100 | 420 | 1e-07 | 23 |
-| 1,000 | 4,194 | 1e-07 | 23 |
-| 10,000 | 41,935 | 1e-07 | 23 |
-| 100,000 | 419,347 | 1e-07 | 23 |
-| 1,000,000 | 4,193,463 | 1e-07 | 23 |
-| 10,000,000 | 41,934,631 | 1e-07 | 23 |
-| 100,000,000 | 419,346,304 | 1e-07 | 23 |
-| 1,000,000,000 | 4,193,463,040 | 1e-07 | 23 |
+| 5 | 1 | 20.00B | 20 |
+| 5 | 10 | 200.00B | 200 |
+| 5 | 100 |  1.95KiB | 2,000 |
+| 5 | 1,000 | 19.53KiB | 20,000 |
+| 5 | 10,000 | 195.31KiB | 200,000 |
+| 5 | 100,000 |  1.91MiB | 2,000,000 |
+| 5 | 1,000,000 | 19.07MiB | 20,000,000 |
+| 5 | 10,000,000 | 190.73MiB | 200,000,000 |
+| 5 | 100,000,000 |  1.86GiB | 2,000,000,000 |
+| 5 | 1,000,000,000 | 18.63GiB | 20,000,000,000 |
 
-### Error Rate: 1e-08
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 10
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 10 | 1e-08 | 26 |
-| 10 | 48 | 1e-08 | 26 |
-| 100 | 480 | 1e-08 | 26 |
-| 1,000 | 4,793 | 1e-08 | 26 |
-| 10,000 | 47,926 | 1e-08 | 26 |
-| 100,000 | 479,253 | 1e-08 | 26 |
-| 1,000,000 | 4,792,530 | 1e-08 | 26 |
-| 10,000,000 | 47,925,292 | 1e-08 | 26 |
-| 100,000,000 | 479,252,919 | 1e-08 | 26 |
-| 1,000,000,000 | 4,792,529,189 | 1e-08 | 26 |
+| 10 | 1 | 40.00B | 40 |
+| 10 | 10 | 400.00B | 400 |
+| 10 | 100 |  3.91KiB | 4,000 |
+| 10 | 1,000 | 39.06KiB | 40,000 |
+| 10 | 10,000 | 390.62KiB | 400,000 |
+| 10 | 100,000 |  3.81MiB | 4,000,000 |
+| 10 | 1,000,000 | 38.15MiB | 40,000,000 |
+| 10 | 10,000,000 | 381.47MiB | 400,000,000 |
+| 10 | 100,000,000 |  3.73GiB | 4,000,000,000 |
+| 10 | 1,000,000,000 | 37.25GiB | 40,000,000,000 |
 
-### Error Rate: 1e-09
-| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |
+### Number Hashes: 15
+| Number of Hashes | Number of Counters | Memory Usage (human)| Memory Usage (bytes) |
 |---|---|---|---|
-| 1 | 11 | 1e-09 | 29 |
-| 10 | 54 | 1e-09 | 29 |
-| 100 | 540 | 1e-09 | 29 |
-| 1,000 | 5,392 | 1e-09 | 29 |
-| 10,000 | 53,916 | 1e-09 | 29 |
-| 100,000 | 539,160 | 1e-09 | 29 |
-| 1,000,000 | 5,391,596 | 1e-09 | 29 |
-| 10,000,000 | 53,915,954 | 1e-09 | 29 |
-| 100,000,000 | 539,159,534 | 1e-09 | 29 |
-| 1,000,000,000 | 5,391,595,338 | 1e-09 | 29 |
+| 15 | 1 | 60.00B | 60 |
+| 15 | 10 | 600.00B | 600 |
+| 15 | 100 |  5.86KiB | 6,000 |
+| 15 | 1,000 | 58.59KiB | 60,000 |
+| 15 | 10,000 | 585.94KiB | 600,000 |
+| 15 | 100,000 |  5.72MiB | 6,000,000 |
+| 15 | 1,000,000 | 57.22MiB | 60,000,000 |
+| 15 | 10,000,000 | 572.20MiB | 600,000,000 |
+| 15 | 100,000,000 |  5.59GiB | 6,000,000,000 |
+| 15 | 1,000,000,000 | 55.88GiB | 60,000,000,000 |

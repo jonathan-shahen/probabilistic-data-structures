@@ -1,10 +1,12 @@
 version: "3.9"
 
 services:
-  bloom_filter_custom_implementation:
-    container_name: bloom_filter_custom_implementation
+  count_min_sketch_custom_implementation:
+    container_name: count_min_sketch_custom_implementation
     image: python:3
     entrypoint: /project/entrypoint.sh
-    command: python -u bloom-filter-custom-implementation.py
+    command: python -u count-min-sketch-custom-implementation.py
     volumes:
       - ./src:/project
+    environment:
+      - RUN_TEST=${RUN_TEST:-0}
