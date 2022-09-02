@@ -73,27 +73,33 @@ class CustomCountMinSketch:
 
 
 def testCustomCountMinSketch():
-    for counters in [10,20,30]:
-        for hashes in [2,4]:
+    for counters in [2,3,4,100]:
+        for hashes in [1,2]:
             print(f'CMS(counters={counters}, hashes={hashes})')
             cms = CustomCountMinSketch(counters,hashes)
 
+            frequencies = [0] * 11
             for i in range(100):
                 cms.update('0', 1)
+                frequencies[0] += 1
             
             total_random_values = 10_000
             for _ in range(total_random_values):
-                cms.update(f'{random.randint(1,11)}', 1)
+                index = random.randint(1,10)
+                cms.update(f'{index}', 1)
+                frequencies[index] += 1
 
             total = 0
-            print(f'Estimate Frequency  0: {cms.estimate("0")} (should be 100)')
-            for i in range(1,11):
+            true_total = 0
+            for i in range(0,11):
                 tmp = cms.estimate(str(i))
                 total += tmp
-                print(f'Estimate Frequency {i: >2}: {tmp}')
+                true_total += frequencies[i]
+                print(f'Estimate Frequency {i: >2}: {tmp:,} (True Value: {frequencies[i]:,}; Diff: {tmp - frequencies[i]:,})')
 
-            print(f'Total frequencies (1-10) should equal: {total_random_values}')
-            print(f'Total frequencies (1-10) in CMS equal: {total}')
+            print(f'Total frequencies (1-10) should equal: {true_total:,}')
+            print(f'Total frequencies (1-10) in CMS equal: {total:,}')
+            print(f'Total frequencies (1-10) difference  : {total - true_total:,}')
             print('')
             del cms
 
