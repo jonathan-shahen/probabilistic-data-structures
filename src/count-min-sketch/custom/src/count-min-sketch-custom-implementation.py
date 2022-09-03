@@ -73,21 +73,34 @@ class CustomCountMinSketch:
 
 
 def testCustomCountMinSketch():
-    for counters in [2,3,4,100]:
-        for hashes in [1,2]:
+    for counters in [100,200,300]:
+        for hashes in [1,2,4]:
+            total_updates = 0
+            frequencies = [0] * 11
+
             print(f'CMS(counters={counters}, hashes={hashes})')
             cms = CustomCountMinSketch(counters,hashes)
 
-            frequencies = [0] * 11
-            for i in range(100):
+            # Forcing the entry '0' to have exactly 100
+            total_fixed_value = 100
+            total_updates += total_fixed_value
+            for i in range(total_fixed_value):
                 cms.update('0', 1)
                 frequencies[0] += 1
             
+            # Filling up the CMS and keeping track of the frequencies
             total_random_values = 10_000
+            total_updates += total_random_values
             for _ in range(total_random_values):
                 index = random.randint(1,10)
                 cms.update(f'{index}', 1)
                 frequencies[index] += 1
+
+            # Filling up the CMS with lots of values
+            total_extra_value = 10_000
+            total_updates += total_extra_value
+            for i in range(11, total_extra_value+11):
+                cms.update(f'{i}', 1)
 
             total = 0
             true_total = 0
@@ -97,9 +110,10 @@ def testCustomCountMinSketch():
                 true_total += frequencies[i]
                 print(f'Estimate Frequency {i: >2}: {tmp:,} (True Value: {frequencies[i]:,}; Diff: {tmp - frequencies[i]:,})')
 
-            print(f'Total frequencies (1-10) should equal: {true_total:,}')
-            print(f'Total frequencies (1-10) in CMS equal: {total:,}')
-            print(f'Total frequencies (1-10) difference  : {total - true_total:,}')
+            print(f'Called CMS->update: {total_updates:,}')
+            print(f'Total frequencies (0-10) should equal: {true_total:,}')
+            print(f'Total frequencies (0-10) in CMS equal: {total:,}')
+            print(f'Total frequencies (0-10) difference  : {total - true_total:,} (this value should never be negative)')
             print('')
             del cms
 
