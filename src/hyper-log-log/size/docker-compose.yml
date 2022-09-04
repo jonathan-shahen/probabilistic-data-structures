@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  redis:
+    container_name: hyper_log_log_size_redis
+    image: redislabs/rebloom:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+      resources:
+        limits:
+          memory: ${DOCKER_REDIS_MEM_LIMIT:-2G}
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+
+  hyper_log_log_size:
+    container_name: hyper_log_log_size
+    image: python:3
+    entrypoint: /project/entrypoint.sh
+    command: python -u hyper-log-log-size.py
+    depends_on:
+      - redis
+    volumes:
+      - ./src:/project
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379

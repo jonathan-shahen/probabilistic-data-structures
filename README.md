@@ -22,5 +22,10 @@ More Details [Quotient Filter](docs/Quotient-Filter.md).
 
 ### Count-Min Sketch
 
+More Details [Count Min Sketch](docs/Count-Min-Sketch.md).
+
+## Cardinality Estimation
 
 ### HyperLogLog (HLL)
+
+More Details [Hyper Log Log](docs/Hyper-Log-Log.md).
