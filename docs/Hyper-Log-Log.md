@@ -19,7 +19,8 @@ improve the estimate).
 
 **NOTE**: HLL estimates get more accurate with more inserts. HLLs have corrections for small, medium, large ranges.
 But for space efficiency, it might be better to store the raw inserts linearly until the storage requirements increase
-to the range of an HLL.
+to the range of an HLL. Redis utilizes a 14400 bytes HLL (it dynamically grows with data), which can store 1800 hashes
+(64 bits long).
 
 
 ## Quick Features
