@@ -3,6 +3,12 @@ import mmh3
 
 from bitarray import bitarray
 
+byteUnits=['B','KiB','MiB','GiB','TiB','PiB']
+def bytesHuman(size,precision=2):
+    unit = int(math.log(size) / math.log(1024))
+    value = size * (1/1024)**(unit)
+    return f'{value: >5.{precision}f}{byteUnits[unit]}'
+
 class CustomBloomFilter:
     def __init__(self, num_elements, error_rate):
         '''
@@ -81,11 +87,11 @@ if __name__ == "__main__":
 
     for error_rate in error_rates:
         print(f"### Error Rate: {error_rate}")
-        print("| Number of Items | Bloom Filter Size (bytes) | Error Rate | Number of Filters |")
-        print("|---|---|---|---|")
+        print("| Number of Items | Bloom Filter Size (human) | Bloom Filter Size (bytes) | Error Rate | Number of Filters |")
+        print("|---|---|---|---|---|")
         for size in required_sizes:
             filter = CustomBloomFilter(size, error_rate)
             info = filter.info()
-            print(f"| {size:,} | {info['num_bytes']:,} | {error_rate} | {info['num_hashes']} |")
+            print(f"| {size:,} | {bytesHuman(info['num_bytes'])} | {info['num_bytes']:,} | {error_rate} | {info['num_hashes']} |")
             del filter
         print("")
